@@ -1,1 +1,3 @@
-# nippon
+# Nippon
+
+Handcrafted language and compiler.

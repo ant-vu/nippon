@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/nippon.dir/src/main.cpp.o -o nippon 

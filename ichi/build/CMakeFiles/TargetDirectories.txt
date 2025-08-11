@@ -1,3 +1,0 @@
-/workspaces/nippon/ichi/build/CMakeFiles/nippon.dir
-/workspaces/nippon/ichi/build/CMakeFiles/edit_cache.dir
-/workspaces/nippon/ichi/build/CMakeFiles/rebuild_cache.dir

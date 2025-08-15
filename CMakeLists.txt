@@ -7,4 +7,5 @@ add_executable(nippon
         src/main.cpp
         src/tokenization.h
         src/parser.h
-        src/generation.h)
+        src/generation.h
+        src/arena.h)

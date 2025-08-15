@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
         contents = contents_stream.str();
     }
 
-    Tokenizer tokenizer(std::move(contents));
+    Tokenizer tokenizer(contents);
     std::vector<Token> tokens = tokenizer.tokenize();
 
     Parser parser(std::move(tokens));
@@ -34,8 +34,8 @@ int main(int argc, char* argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    Generator generator(prog.value());
     {
+        Generator generator(prog.value());
         std::fstream file("main.asm", std::ios::out);
         file << generator.gen_prog();
     }

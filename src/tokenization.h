@@ -3,29 +3,16 @@
 #include <string>
 #include <vector>
 
-enum class TokenType
-{
-    exit,
-    int_lit,
-    semi,
-    open_paren,
-    close_paren,
-    ident,
-    let,
-    eq,
-    plus
-};
+enum class TokenType { exit, int_lit, semi, open_paren, close_paren, ident, let, eq, plus };
 
-struct Token
-{
+struct Token {
     TokenType type;
     std::optional<std::string> value {};
 };
 
-class Tokenizer
-{
+class Tokenizer {
 public:
-    inline explicit Tokenizer(const std::string src)
+    inline explicit Tokenizer(std::string src)
         : m_src(std::move(src))
     {
     }
@@ -34,81 +21,67 @@ public:
     {
         std::vector<Token> tokens;
         std::string buf;
-        while (peek().has_value())
-        {
+        while (peek().has_value()) {
             if (std::isalpha(peek().value())) {
                 buf.push_back(consume());
-                while (peek().has_value() && std::isalnum(peek().value()))
-                {
+                while (peek().has_value() && std::isalnum(peek().value())) {
                     buf.push_back(consume());
                 }
-                if (buf == "exit")
-                {
-                    tokens.push_back({ .type=TokenType::exit });
+                if (buf == "exit") {
+                    tokens.push_back({ .type = TokenType::exit });
                     buf.clear();
                     continue;
                 }
-                else if (buf == "let")
-                {
-                    tokens.push_back({ .type=TokenType::let });
+                else if (buf == "let") {
+                    tokens.push_back({ .type = TokenType::let });
                     buf.clear();
                     continue;
                 }
-                else
-                {
-                    tokens.push_back({ .type=TokenType::ident, .value=buf });
+                else {
+                    tokens.push_back({ .type = TokenType::ident, .value = buf });
                     buf.clear();
                     continue;
                 }
             }
-            else if (std::isdigit(peek().value()))
-            {
+            else if (std::isdigit(peek().value())) {
                 buf.push_back(consume());
-                while (peek().has_value() && std::isdigit(peek().value()))
-                {
+                while (peek().has_value() && std::isdigit(peek().value())) {
                     buf.push_back(consume());
                 }
-                tokens.push_back({ .type=TokenType::int_lit, .value=buf });
+                tokens.push_back({ .type = TokenType::int_lit, .value = buf });
                 buf.clear();
                 continue;
             }
-            else if (peek().value() == '(')
-            {
+            else if (peek().value() == '(') {
                 consume();
-                tokens.push_back({ .type=TokenType::open_paren });
+                tokens.push_back({ .type = TokenType::open_paren });
                 continue;
             }
-            else if (peek().value() == ')')
-            {
+            else if (peek().value() == ')') {
                 consume();
-                tokens.push_back({ .type=TokenType::close_paren });
+                tokens.push_back({ .type = TokenType::close_paren });
                 continue;
             }
-            else if (peek().value() == ';')
-            {
+            else if (peek().value() == ';') {
                 consume();
-                tokens.push_back({ .type=TokenType::semi });
+                tokens.push_back({ .type = TokenType::semi });
                 continue;
             }
-            else if (peek().value() == '=')
-            {
+            else if (peek().value() == '=') {
                 consume();
-                tokens.push_back({ .type=TokenType::eq });
+                tokens.push_back({ .type = TokenType::eq });
                 continue;
             }
-            else if (peek().value() == '+')
-            {
+            else if (peek().value() == '+') {
                 consume();
-                tokens.push_back({ .type=TokenType::plus });
+                tokens.push_back({ .type = TokenType::plus });
                 continue;
             }
-            else if (std::isspace(peek().value()))
-            {
+            else if (std::isspace(peek().value())) {
                 consume();
                 continue;
             }
-            else
-            {
+            else {
                 std::cerr << "You messed up!" << std::endl;
                 exit(EXIT_FAILURE);
             }
@@ -120,12 +93,10 @@ public:
 private:
     [[nodiscard]] inline std::optional<char> peek(int offset = 0) const
     {
-        if (m_index + offset >= m_src.length())
-        {
+        if (m_index + offset >= m_src.length()) {
             return {};
         }
-        else
-        {
+        else {
             return m_src.at(m_index + offset);
         }
     }

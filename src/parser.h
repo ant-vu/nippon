@@ -100,7 +100,7 @@ public:
 
     std::optional<NodeExpr*> parse_expr()
     {
-        if (auto term = parse_expr())
+        if (auto term = parse_term())
         {
             if (try_consume(TokenType::plus).has_value())
             {
@@ -136,7 +136,7 @@ public:
         }
     }
 
-    std::optional<NodeStmt> parse_stmt()
+    std::optional<NodeStmt*> parse_stmt()
     {
         if (peek().value().type == TokenType::exit && peek(1).has_value() && peek(1).value().type == TokenType::open_paren)
         {
@@ -145,7 +145,7 @@ public:
             auto stmt_exit = m_allocator.alloc<NodeStmtExit>();
             if (auto node_expr = parse_expr())
             {
-                stmt_exit->node_expr.value();
+                stmt_exit->expr = node_expr.value();
             }
             else
             {
@@ -233,7 +233,7 @@ private:
         }
     }
 
-    inline Token try_consume(TokenType type)
+    inline std::optional<Token> try_consume(TokenType type)
     {
         if (peek().has_value() && peek().value().type == type)
         {

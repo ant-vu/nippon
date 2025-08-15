@@ -10,7 +10,7 @@ public:
         m_offset = m_buffer;
     }
 
-    template<typename T>
+    template <typename T>
     inline T* alloc()
     {
         void* offset = m_offset;

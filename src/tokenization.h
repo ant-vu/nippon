@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-enum class TokenType { exit, int_lit, semi, open_paren, close_paren, ident, let, eq, plus, star, sub, div };
+enum class TokenType { exit, int_lit, semi, open_paren, close_paren, ident, let, eq, plus, star, sub, div, open_curly, close_curly };
 
 inline std::optional<int> bin_prec(TokenType type)
 {
@@ -94,6 +94,14 @@ public:
             else if (peek().value() == '/') {
                 consume();
                 tokens.push_back({ .type = TokenType::div });
+            }
+            else if (peek().value() == '{') {
+                consume();
+                tokens.push_back({ .type = TokenType::open_curly });
+            }
+            else if (peek().value() == '}') {
+                consume();
+                tokens.push_back({ .type = TokenType::close_curly });
             }
             else if (std::isspace(peek().value())) {
                 consume();

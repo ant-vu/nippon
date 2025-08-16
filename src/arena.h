@@ -3,7 +3,7 @@
 class ArenaAllocator
 {
 public:
-    explicit ArenaAllocator(size_t bytes)
+    explicit ArenaAllocator(const size_t bytes)
         : m_size(bytes)
     {
         m_buffer = static_cast<std::byte*>(malloc(m_size));

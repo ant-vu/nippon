@@ -3,9 +3,25 @@
 #include <string>
 #include <vector>
 
-enum class TokenType { exit, int_lit, semi, open_paren, close_paren, ident, let, eq, plus, star, minus, fslash, open_curly, close_curly, if_ };
+enum class TokenType {
+    exit,
+    int_lit,
+    semi,
+    open_paren,
+    close_paren,
+    ident,
+    let,
+    eq,
+    plus,
+    star,
+    minus,
+    fslash,
+    open_curly,
+    close_curly,
+    if_
+};
 
-inline std::optional<int> bin_prec(TokenType type)
+inline std::optional<int> bin_prec(const TokenType type)
 {
     switch (type)
     {

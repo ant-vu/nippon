@@ -3,16 +3,16 @@
 #include <string>
 #include <vector>
 
-enum class TokenType { exit, int_lit, semi, open_paren, close_paren, ident, let, eq, plus, star, sub, div, open_curly, close_curly };
+enum class TokenType { exit, int_lit, semi, open_paren, close_paren, ident, let, eq, plus, star, minus, fslash, open_curly, close_curly, if_ };
 
 inline std::optional<int> bin_prec(TokenType type)
 {
     switch (type)
     {
-    case TokenType::sub:
+    case TokenType::minus:
     case TokenType::plus:
         return 0;
-    case TokenType::div:
+    case TokenType::fslash:
     case TokenType::star:
         return 1;
     default:
@@ -48,6 +48,10 @@ public:
                 }
                 else if (buf == "let") {
                     tokens.push_back({ .type = TokenType::let });
+                    buf.clear();
+                }
+                else if (buf == "if") {
+                    tokens.push_back({ .type = TokenType::if_ });
                     buf.clear();
                 }
                 else {
@@ -89,11 +93,11 @@ public:
             }
             else if (peek().value() == '-') {
                 consume();
-                tokens.push_back({ .type = TokenType::sub });
+                tokens.push_back({ .type = TokenType::minus });
             }
             else if (peek().value() == '/') {
                 consume();
-                tokens.push_back({ .type = TokenType::div });
+                tokens.push_back({ .type = TokenType::fslash });
             }
             else if (peek().value() == '{') {
                 consume();
@@ -116,7 +120,7 @@ public:
     }
 
 private:
-    [[nodiscard]] std::optional<char> peek(int offset = 0) const
+    [[nodiscard]] std::optional<char> peek(size_t offset = 0) const
     {
         if (m_index + offset >= m_src.length()) {
             return {};

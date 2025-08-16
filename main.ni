@@ -1,3 +1,6 @@
-let x = (1 - 2) * 3 + 4 / 5;
-let y = x + 5;
-exit(x);
+let y = (10 - 2 * 3) / 2;
+let x = 1;
+if (x - 1) {
+    exit(6);
+}
+exit(1);

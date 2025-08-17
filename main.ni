@@ -1,13 +1,13 @@
-let y = (10 - 2 * 3) / 2;
-let x = 1;
 // comment
 /*
-multiline comment
+multi-line comment
 */
+let x = 10;
+let y = (9 - 8 + 7 * 6) / 5;
 if (x - 1) {
-    exit(6);
-} elif (1) {
-    exit(7);
+    exit(20);
+} elif (y) {
+    exit(30);
 } else {
-    exit(1);
+    exit(40);
 }

@@ -67,6 +67,14 @@ struct NodeScope {
     std::vector<NodeStmt*> stmts;
 };
 
+struct NodeIfPredElif
+{
+};
+
+struct NodeIfPredElse
+{
+};
+
 struct NodeStmtIf {
     NodeExpr* expr;
     NodeScope* scope;

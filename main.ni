@@ -6,7 +6,7 @@ multiline comment
 */
 if (x - 1) {
     exit(6);
-} elif (x) {
+} elif (1) {
     exit(7);
 } else {
     exit(1);

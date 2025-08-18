@@ -4,12 +4,11 @@ multi-line comment
 */
 let x = 1;
 let y = (9 - 8 + 7 * 6) / 5;
-if (x - 1) {
+if (0) {
+    x = 1;
+} elif (0) {
     x = 2;
-    x = x;
-    exit(20);
-} elif (y) {
-    exit(30);
 } else {
-    exit(40);
+    x = 3;
 }
+exit(x);
